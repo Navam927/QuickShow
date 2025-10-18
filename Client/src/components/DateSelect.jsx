@@ -13,7 +13,7 @@ const DateSelect = forwardRef(({dateTime, id}, ref) => {
     if (!selected) {
       return toast('Please select a date')
     }
-    navigate(`/movie/${id}/${selected}`);
+    navigate(`/movies/${id}/${selected}`);
     scrollTo(0, 0);
   }
 

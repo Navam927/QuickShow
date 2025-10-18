@@ -17,11 +17,13 @@ const MovieDetails = () => {
 
   const getShow = async() => {
     const show = dummyShowsData.find(show => show._id === id);
-    setShow({
+
+    if (show) {
+      setShow({
       movie: show, 
       dateTime : dummyDateTimeData, 
-
     })
+    }
   }
 
   useEffect(() => {
