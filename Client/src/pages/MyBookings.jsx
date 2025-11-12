@@ -22,7 +22,7 @@ const MyBookings = () => {
     <div className='relative px-6 md:px-16 lg:px-40 pt-30 md:pt-40 min-h-[80vh]'>
       <BlurCircle top='100px' left='100px'/>
       <div>
-        <BlurCircle top='100px' left='600px'/>
+        <BlurCircle bottom='0px' left='600px'/>
       </div>
       <h1 className='text-lg font-semibold mb-4 '>My Bookings</h1>
       {
@@ -38,21 +38,19 @@ const MyBookings = () => {
                 <p className='text-gray-400 text-sm'>{timeFormat(item.show.movie.runtime)}</p>
                 <p className='text-gray-400 text-sm mt-auto'>{dateFormat(item.show.showDateTime)}</p>
               </div>
+            </div>
+            <div className='flex flex-col md:items-end md:text-right justify-between p-4'> 
 
-              <div className='flex flex-col md:items-end md:text-right justify-between p-4'> 
+              <div className='flex items-center gap-4'>
+                <p className='text-2xl font-semibold mb-3'>
+                  {currency}{item.amount}
+                </p>
+                {!item.isPaid && <button className='bg-primary px-4 py-1.5 mb-3 text-sm rounded-full font-medium cursor-pointer' >Pay Now</button>}
+              </div>
 
-                <div className='flex items-center gap-4'>
-                  <p className='text-2xl font-semibold mb-3'>
-                    {currency}{item.amount}
-                  </p>
-                  {!item.isPaid && <button className='bg-primary px-4 py-1.5 mb-3 text-sm rounded-full font-medium cursor-pointer' >Pay Now</button>}
-                </div>
-
-                <div className='text-sm'> 
-                  <p> <span className='text-gray-400'>Total Tickets:</span>{item.bookedSeats.length}</p>
-                  <p> <span className='text-gray-400'>Seat Numbers:</span>{item.bookedSeats.join(", " )}</p>
-                </div>
-
+              <div className='text-sm'> 
+                <p> <span className='text-gray-400'>Total Tickets:</span>{item.bookedSeats.length}</p>
+                <p> <span className='text-gray-400'>Seat Numbers:</span>{item.bookedSeats.join(", " )}</p>
               </div>
 
             </div>
