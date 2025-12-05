@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 import { DB_CONNECTION_FAILURE, DB_CONNECTION_SUCESSS } from "../utils/debug.js";
 import { configDotenv } from "dotenv";
-configDotenv();
+
+if (process.env.NODE_ENV !== "production") {
+  configDotenv();
+} 
 
 const connectDB = async () => {
   try {
