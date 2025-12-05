@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { DB_CONNECTION_FAILURE, DB_CONNECTION_SUCESSS } from "../utils/debug.js";
-process.loadEnvFile('./.env');
+import { configDotenv } from "dotenv";
+configDotenv();
 
 const connectDB = async () => {
   try {
