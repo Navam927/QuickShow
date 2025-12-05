@@ -1,15 +1,23 @@
 import mongoose from "mongoose";
-import { DB_CONNECTION_FAILURE, DB_CONNECTION_SUCESSS } from "../utils/debug.js";
-import { configDotenv } from "dotenv";
+import { DATABASE_ALREADY_CONNECTED, DB_CONNECTION_FAILURE, DB_CONNECTION_SUCESSS, MONGO_URI_ERROR } from "../utils/debug.js";
 
-if (process.env.NODE_ENV !== "production") {
-  configDotenv();
-} 
+const uri = process.env.MONGO_URI;
 
 const connectDB = async () => {
+
+  if (!uri || typeof uri !== 'string') {
+    console.error(DB_CONNECTION_FAILURE, MONGO_URI_ERROR);
+    process.exit(1);
+  }
+
+  if (mongoose.connection.readyState === 1) {
+    console.log(DATABASE_ALREADY_CONNECTED);
+    return mongoose.connection;
+  }
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log(DB_CONNECTION_SUCESSS, '\nhost:', mongoose.connection.host);
+    await mongoose.connect(uri);
+    console.log(DB_CONNECTION_SUCESSS);
+    return mongoose.connection;
   } catch (error) {
     console.error(DB_CONNECTION_FAILURE, error);
     process.exit(1);

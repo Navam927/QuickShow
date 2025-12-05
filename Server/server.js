@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { configDotenv } from 'dotenv';
+import './configs/configLoader.js'
 import connectDB from './configs/db.js';
 import { SERVER_BASE_ROUTE } from './utils/debug.js';
 import {clerkMiddleware} from '@clerk/express';
@@ -10,7 +10,11 @@ import { inngest, functions } from "./inngest/index.js"
 const app = express();
 const port = 3000;
 
-connectDB();
+(async () => {
+  await connectDB();
+  app.listen(port, () => console.log(`Server is running at http://localhost:${port}`));
+})();
+
 // Middleware
 app.use(express.json());
 app.use(cors());
