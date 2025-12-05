@@ -5,7 +5,7 @@ const uri = process.env.MONGO_URI;
 
 const connectDB = async () => {
 
-  if (!uri || typeof uri !== 'string') {
+  if (!uri) {
     console.log('uri_is_present : ', !!process.env.MONGO_URI)
     console.error(DB_CONNECTION_FAILURE, MONGO_URI_ERROR);
     process.exit(1);
