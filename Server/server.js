@@ -6,6 +6,7 @@ import { SERVER_BASE_ROUTE } from './utils/debug.js';
 import {clerkMiddleware} from '@clerk/express';
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js"
+import showRouter from './routes/showRoutes.js';
 
 const app = express();
 const port = 3000;
@@ -19,6 +20,7 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 app.use(clerkMiddleware());
+app.use( '/api/show', showRouter);
 app.use('/api/inngest', serve({
   client : inngest, 
   functions
